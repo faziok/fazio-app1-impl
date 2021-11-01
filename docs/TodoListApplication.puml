@@ -1,0 +1,45 @@
+@startuml
+class Application{
+    +main()
+        launch()
+}
+
+class TodoList{
+    +addItem()
+    +deleteItem()
+    +clearItems()
+}
+
+class TodoListItem{
+    -description
+    -dueDate
+    +setDescription()
+    +getDescription()
+    +setDueDate()
+    +getDueDate()
+    +editDescription()
+    +checkCompleted()
+}
+
+class FilterItems{
+    filterItems();
+}
+
+class Save{
+    +setFileName()
+    +setFileLocation()
+    +writeList()
+}
+
+class Load{
+    +loadFIle()
+    +getLoadedFile();
+}
+
+Application <|-- Load
+Application <|-- TodoListItem
+Application <|-- TodoList
+Application <|-- FilterItems
+Application <|-- Save
+
+@enduml
