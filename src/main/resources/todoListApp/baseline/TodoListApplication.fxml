@@ -5,23 +5,34 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoListApp.baseline.TodoListApplicationController">
     <children>
-        <DatePicker fx:id="dueDate" layoutX="5.0" layoutY="134.0" prefHeight="25.0" promptText="Select due date" />
-        <TextArea fx:id="itemDescription" layoutX="5.0" layoutY="10.0" prefHeight="120.0" prefWidth="450.0" promptText="Enter an item description" />
-        <ScrollPane fx:id="itemsListView" layoutX="5.0" layoutY="167.0" prefHeight="315.0" prefWidth="450.0" />
-        <Button fx:id="addItem" layoutX="389.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Add Item" />
-        <Button fx:id="updateItem" layoutX="316.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Update" />
-        <Button fx:id="deleteItem" layoutX="5.0" layoutY="491.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Delete" />
-        <Button fx:id="save" layoutX="316.0" layoutY="491.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
-        <Button fx:id="load" layoutX="389.0" layoutY="491.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Load" />
-        <ChoiceBox fx:id="filter" layoutX="149.0" layoutY="491.0" prefHeight="25.0" prefWidth="160.0" />
-        <CheckBox fx:id="completed" layoutX="202.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Completed" />
-        <Button fx:id="clearList" layoutX="77.0" layoutY="491.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Clear List" />
+      <DatePicker fx:id="dueDate" editable="false" focusTraversable="false" layoutX="5.0" layoutY="134.0" prefHeight="25.0" prefWidth="120.0" showWeekNumbers="true" />
+      <TextField fx:id="itemDescription" alignment="TOP_LEFT" layoutX="4.0" layoutY="7.0" prefHeight="120.0" prefWidth="450.0" promptText="Enter an item description" />
+      <TableView fx:id="itemsTableView" layoutX="4.0" layoutY="166.0" prefHeight="315.0" prefWidth="450.0">
+        <columns>
+          <TableColumn fx:id="descriptionCol" editable="false" prefWidth="250.0" resizable="false" text="Description" />
+          <TableColumn fx:id="dueDateCol" editable="false" prefWidth="100.0" resizable="false" text="Due Date" />
+          <TableColumn fx:id="statusCol" editable="false" prefWidth="97.0" resizable="false" text="Status" />
+        </columns>
+      </TableView>
+      <Button fx:id="addItem" defaultButton="true" layoutX="389.0" layoutY="134.0" mnemonicParsing="false" onAction="#addItem" onKeyPressed="#addItem" prefHeight="25.0" prefWidth="65.0" text="Add Item" />
+      <Button fx:id="updateItem" layoutX="316.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Update" />
+      <Button fx:id="deleteItem" layoutX="5.0" layoutY="491.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="25.0" prefWidth="65.0" text=" Delete Item">
+         <font>
+            <Font size="9.65" />
+         </font></Button>
+      <Button fx:id="clearList" focusTraversable="false" layoutX="77.0" layoutY="491.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="65.0" text="Clear List" />
+      <Button fx:id="save" layoutX="316.0" layoutY="491.0" mnemonicParsing="false" onAction="#saveList" prefHeight="25.0" prefWidth="65.0" text="Save" />
+      <Button fx:id="load" layoutX="389.0" layoutY="491.0" mnemonicParsing="false" onAction="#loadList" prefHeight="25.0" prefWidth="65.0" text="Load" />
+      <ChoiceBox fx:id="filter" layoutX="149.0" layoutY="491.0" prefHeight="25.0" prefWidth="160.0" />
+      <CheckBox fx:id="statusBox" focusTraversable="false" layoutX="131.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Completed" />
     </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

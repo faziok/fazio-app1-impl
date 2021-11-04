@@ -39,20 +39,23 @@ package todoListApp.baseline;
  *      (e.g. add an item, remove an item, edit an item, etc.)
  */
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class TodoListApplication extends javafx.application.Application {
+public class TodoListApplication extends Application {
     @Override
     public void start (Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TodoListApplication.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("TodoListApplication.fxml")));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
 
         stage.setTitle("To-Do List");
         stage.setScene(scene);

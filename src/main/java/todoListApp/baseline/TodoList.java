@@ -7,36 +7,28 @@ package todoListApp.baseline;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class TodoList {
+    TodoListItem todoListItem = new TodoListItem();
+
     //list with 100 item max
-    List<Map<Integer, String>> todoList = new ArrayList<>();
+    private List<TodoListItem> item = new ArrayList<>(100);
 
-    public Map<Integer, String> addItem (){
-        //add map for new item.
-
-        //when item add button is pressed
-            //if getDescription is null or greater than 256 characters
-                //send error message that a description must be entered
-                //exit method
-
-            //if getDate is NOT selected or date has already passed
-                //set dueDate to "No due date selected"
-            //else
-                //set dueDate to selected date in YYYY-MM-DD format
-
-            //add item to selected to-do list using maps
-            //key 1 will contain the value of the description
-            //key 2 will contain the value of the dueDate
-
-            //sort by due date
-
-        //return
-        return null;
+    /*
+    public TodoList(){
+        item = new ArrayList<>(100);
+        item.add(new TodoListItem());
     }
 
-    public void deleteItem (Map<Integer, String> selectedItem){
+    public List<TodoListItem> setList(){
+        return item;
+    }
+
+    public List<TodoListItem> getList(){
+        return item;
+    }
+
+    public void deleteItem (List<String> selectedItem){
         //delete selected item.
         //remove item from item listView.
     }
@@ -44,4 +36,5 @@ public class TodoList {
     public void clearList (List<Map<Integer, String>> list){
         //delete list
     }
+     */
 }

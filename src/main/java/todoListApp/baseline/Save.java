@@ -5,6 +5,9 @@ package todoListApp.baseline;
  *  Copyright 2021 Keven Fazio
  */
 
+import javafx.stage.FileChooser;
+
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +26,20 @@ public class Save {
     }
 
     public void writeFile (List<Map<Integer, String>> TodoList){
-        //create a new file
-        //create a new printWriter
-        //write todoList to file
-        //close writer
+        //try
+
+        /*
+        try {
+            //create printerwriter for new file and print newTxt to file.
+            PrintWriter pWriter = new PrintWriter(file);
+            pWriter.write(newTxt);
+
+            pWriter.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+         */
     }
 }

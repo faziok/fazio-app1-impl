@@ -13,12 +13,14 @@ class TodoList{
 class TodoListItem{
     -description
     -dueDate
+    -completedStatus
     +setDescription()
     +getDescription()
     +setDueDate()
     +getDueDate()
+    +getStatus()
+    +setStatus(boolean Status)
     +editDescription()
-    +checkCompleted()
 }
 
 class FilterItems{
