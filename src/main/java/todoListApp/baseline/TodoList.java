@@ -5,36 +5,37 @@ package todoListApp.baseline;
  *  Copyright 2021 Keven Fazio
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 public class TodoList {
-    TodoListItem todoListItem = new TodoListItem();
+    //initialize observable list
+    private final ObservableList<TodoListItem> itemList = FXCollections.observableArrayList();
 
-    //list with 100 item max
-    private List<TodoListItem> item = new ArrayList<>(100);
-
-    /*
-    public TodoList(){
-        item = new ArrayList<>(100);
-        item.add(new TodoListItem());
+    public void addItems(TodoListItem item){
+        //Only add to the list if there are < 100 items currently in the list.
+        if (itemList.size() < 100){
+            itemList.add(item);
+        }
     }
 
-    public List<TodoListItem> setList(){
-        return item;
+    public ObservableList<TodoListItem> getTodoList(){
+        //get list
+        return itemList;
     }
 
-    public List<TodoListItem> getList(){
-        return item;
+    public void clearList(){
+        //clear list
+        itemList.clear();
     }
 
-    public void deleteItem (List<String> selectedItem){
-        //delete selected item.
-        //remove item from item listView.
+    public void deleteItem(TodoListItem item){
+        //remove item from list
+        itemList.remove(item);
     }
 
-    public void clearList (List<Map<Integer, String>> list){
-        //delete list
+    public void filterList(){
+        //filter list based off choiceBox selection
     }
-     */
 }

@@ -64,6 +64,11 @@ public class TodoListItem {
         this.status = status;
     }
 
+    @Override
+    public String toString(){
+        return description + " " + dueDate + " " + getStatus();
+    }
+
     public void editDescription (String description){
         //set description with updated description for selected item when update button is pressed
     }

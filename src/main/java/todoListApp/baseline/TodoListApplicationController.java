@@ -5,8 +5,11 @@ package todoListApp.baseline;
  *  Copyright 2021 Keven Fazio
  */
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +40,7 @@ public class TodoListApplicationController implements Initializable {
     public TableColumn<TodoListItem, String> descriptionCol;
 
     @FXML
-    public TableColumn<TodoListItem, LocalDate> dueDateCol;
+    public TableColumn<TodoListItem, String> dueDateCol;
 
     @FXML
     public TableColumn<TodoListItem, String> statusCol;
@@ -54,6 +58,9 @@ public class TodoListApplicationController implements Initializable {
     private Button updateItem;
 
     @FXML
+    private Button clearButton;
+
+    @FXML
     private Button save;
 
     @FXML
@@ -67,70 +74,112 @@ public class TodoListApplicationController implements Initializable {
     @FXML
     private CheckBox statusBox;
 
+
+    //--------------------------------------
+
+
+    //List for file extension
+    List<String> fileExt;
+
+    //Observable list object
+    TodoList list = new TodoList();
+
+    //Initialize
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //set up tableView columns
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        //set up filter choiceBox
         filter.setItems(filterList);
         filter.setValue("All");
-        dueDate.setValue(LocalDate.now());
+
+        //Setup min and max return string size for textField
+        //itemDescription.setText(itemDescription.getText().substring(0, 256));
+
+        //ensure input fields are at default
+        clearFields();
+
+        //setup file extensions
         fileExt = new ArrayList<>();
         fileExt.add("*.txt");
     }
 
-    List<String> fileExt;
-    List<TodoListItem> todoList = new ArrayList<>(100);
-    ObservableList<TodoListItem> list = FXCollections.observableArrayList();
+    @FXML
+    private void clear(ActionEvent e){
+        clearFields();
+    }
 
     @FXML
-    private void addItem(Event e){
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        list.add(new TodoListItem(itemDescription.getText(), dueDate.getValue(), statusBox.isSelected()));
-        todoList.add(new TodoListItem(itemDescription.getText(), dueDate.getValue(), statusBox.isSelected()));
-        itemsTableView.setItems(list);
+    private void addItem(ActionEvent e){
+        //get input from fields
+        String description = itemDescription.getText();
+        LocalDate date = dueDate.getValue();
+        boolean status = statusBox.isSelected();
 
-        System.out.println(todoList.toString());
+        //create TodoListItem object and add it to list
+        TodoListItem item = new TodoListItem(description, date, status);
+        list.addItems(item);
+
+        //send list data to tableview
+        itemsTableView.setItems(list.getTodoList());
+
+        System.out.println(list.getTodoList()); //delete test print
 
         //clear item input fields
-        itemDescription.clear();
-        dueDate.setValue(LocalDate.now());
-        statusBox.setSelected(false);
+        clearFields();
     }
 
     @FXML
-    private void clearList(Event e){
-        list.clear();
+    private void clearList(ActionEvent e){
+        list.clearList();
+
+        System.out.println(list.getTodoList()); //delete test print
     }
 
     @FXML
-    private void deleteItem(Event e){
-        itemsTableView.getItems().removeAll(itemsTableView.getSelectionModel().getSelectedItem());
+    private void deleteItem(ActionEvent e){
+        TodoListItem tableIndex = itemsTableView.getSelectionModel().getSelectedItem();
+
+        list.deleteItem(tableIndex);
+
+        System.out.println(list.getTodoList()); //delete test print
     }
 
     @FXML
-    private void saveList(Event e){
+    private void editItem(ActionEvent e){
+
+    }
+
+    @FXML
+    private void filterItems(ActionEvent e){
+
+        list.filterList();
+
+        System.out.println(list.getTodoList());
+    }
+
+    @FXML
+    private void saveList(ActionEvent e){
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Txt Files", fileExt));
         File file = fc.showSaveDialog(null);
     }
 
     @FXML
-    private void loadList(Event e){
+    private void loadList(ActionEvent e){
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Txt Files", fileExt));
         File file = fc.showOpenDialog(null);
     }
 
-    @FXML
-    private void editItem(Event e){
-
-    }
-
-
-
-    private void refresh(){
+    //method to clear input fields when needed
+    private void clearFields(){
+        //clear item input fields
+        itemDescription.clear();
         dueDate.setValue(LocalDate.now());
-        itemDescription.setText(null);
         statusBox.setSelected(false);
     }
 }
