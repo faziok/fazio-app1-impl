@@ -2,23 +2,17 @@ package todoListApp.baseline;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TodoListItemTest {
-    //create a few test items
-
     @Test
-    void getDescription() {
-        //assertEquals test description equals actual.
-    }
+    void testToString() {
+        String testString = "words to test1 2022-12-25 Completed";
 
-    @Test
-    void getDueDate() {
-        //assertEquals test date equals actual.
-    }
+        String itemArr = new TodoListItem("words to test1", LocalDate.of(2022, 12, 25), true).toString();
 
-    @Test
-    void checkCompleted() {
-        //assertTrue test complete is true
+        assertEquals(testString, itemArr);
     }
 }

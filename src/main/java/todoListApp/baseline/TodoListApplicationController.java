@@ -142,12 +142,14 @@ public class TodoListApplicationController implements Initializable {
     @FXML
     private void clearList(ActionEvent e) {
         list.clearList();
-    }
+    } //clear list of items
 
     @FXML
     private void deleteItem(ActionEvent e) {
+        //get selected item from tableview selection row
         TodoListItem tableIndex = itemsTableView.getSelectionModel().getSelectedItem();
 
+        //delete selected item
         list.deleteItem(tableIndex);
     }
 
@@ -163,14 +165,11 @@ public class TodoListApplicationController implements Initializable {
             //clear item input fields
             clearFields();
         } else {
-            list.editItem(description, date, status, listIndex);
+            list.updateItem(description, date, status, listIndex);
         }
 
         //send list data to tableview
         itemsTableView.setItems(list.getFilteredTodoList());
-
-        //release table index
-        //updateTableIndex = null;
 
         //clear item input fields
         clearFields();
@@ -203,17 +202,23 @@ public class TodoListApplicationController implements Initializable {
 
     @FXML
     private void filterItems(ActionEvent e) {
+        //get value from comboBox
         String val = filter.getValue();
 
+        //send value to filter method from to-do list
         list.filterList(val);
+
+        //set the tableview to show the filtered list of items
         itemsTableView.setItems(list.getFilteredTodoList());
     }
 
     @FXML
     private void saveList(ActionEvent e) {
+        //set extension for txt and show saved dialog box
         fc.getExtensionFilters().add(extFilter);
         File file = fc.showSaveDialog(null);
 
+        //if a file name and location is chosen, save the file
         if (file != null) {
             save.saveTxtFile(file, list.getItemList());
         }
@@ -221,6 +226,7 @@ public class TodoListApplicationController implements Initializable {
 
     @FXML
     private void loadList(ActionEvent e) throws IOException {
+        //set extension for txt and show open dialog box
         fc.getExtensionFilters().add(extFilter);
         File file = fc.showOpenDialog(null);
 
@@ -241,6 +247,9 @@ public class TodoListApplicationController implements Initializable {
                     //instance variables
                     String description = newDataArr[0];
 
+                    //set local date
+                        //if input from file is "" set to null
+                        //else set to input
                     LocalDate date;
                     if (newDataArr[1].equals("")) {
                         date = null;
@@ -248,6 +257,8 @@ public class TodoListApplicationController implements Initializable {
                         date = LocalDate.parse(newDataArr[1]);
                     }
 
+                    //if input is 'Completed' set status to true
+                        //else false
                     boolean status;
                     status = newDataArr[2].equals(SHOW_COMPLETED);
 

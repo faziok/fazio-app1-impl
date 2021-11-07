@@ -20,10 +20,8 @@ public class TodoList {
         //create TodoListItem object and add it to list
         TodoListItem item = new TodoListItem(description, date, status);
 
-        //Only add to the list if there are < 100 items currently in the list.
-        if (itemList.size() < 100){
-            itemList.add(item);
-        }
+        //Add item to list
+        itemList.add(item);
     }
 
     public ObservableList<TodoListItem> getFilteredTodoList(){
@@ -47,6 +45,10 @@ public class TodoList {
     }
 
     public void filterList(String val){
+        //set predicate for filter
+            //if val = 'All' return the full list
+            //else if val = 'Completed' return only completed items
+            //else return 'Incomplete' items
         filteredItems.setPredicate(todoListItem -> {
             if (val.equals("All")){
                 return true;
@@ -56,13 +58,11 @@ public class TodoList {
         });
     }
 
-    public void editItem(String description, LocalDate date, boolean status, int listIndex){
+    public void updateItem(String description, LocalDate date, boolean status, int listIndex){
         //create TodoListItem object and add it to list
         TodoListItem item = new TodoListItem(description, date, status);
 
-        //Only add to the list if there are < 100 items currently in the list.
-        if (itemList.size() < 100){
-            getItemList().set(listIndex, item);
-        }
+        //set updated information to selected index in list.
+        getItemList().set(listIndex, item);
     }
 }

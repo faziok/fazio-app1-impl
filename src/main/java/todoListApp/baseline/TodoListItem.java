@@ -72,6 +72,7 @@ public class TodoListItem {
         this.status = status;
     }
 
+    //override data to a string
     @Override
     public String toString(){
         return getDescription() + " " + getDueDate() + " " + getStatus();

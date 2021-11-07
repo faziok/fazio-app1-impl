@@ -11,13 +11,15 @@ import java.io.*;
 
 public class Save {
     public void saveTxtFile (File file, ObservableList<TodoListItem> list){
+        //try the list and writes to file from file chooser
             try {
                 PrintWriter pWriter = new PrintWriter(file);
+                //write the file for the entire list of existing items
                 for (TodoListItem s : list) {
                     pWriter.write(s.getDescription() + "," + s.getDueDate() + "," + s.getStatus() + "\n");
                 }
 
-                System.out.println("File written Successfully");
+                //close writer
                 pWriter.close();
 
             } catch (IOException ioe) {

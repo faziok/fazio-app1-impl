@@ -14,7 +14,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoListApp.baseline.TodoListApplicationController">
     <children>
-      <DatePicker fx:id="dueDate" editable="false" focusTraversable="false" layoutX="4.0" layoutY="147.0" prefHeight="25.0" prefWidth="120.0" promptText="Due Date" />
+      <DatePicker fx:id="dueDate" focusTraversable="false" layoutX="4.0" layoutY="147.0" prefHeight="25.0" prefWidth="120.0" promptText="Due Date" />
       <TextField alignment="TOP_LEFT" editable="false" layoutX="4.0" layoutY="14.0" prefHeight="125.0" prefWidth="520.0" promptText="Enter an item description between 1 and 256 characters long." />
       <TextArea fx:id="itemDescription" layoutX="4.0" layoutY="14.0" prefHeight="125.0" prefWidth="520.0" promptText="Enter an item description between 1 and 256 characters long." wrapText="true" />
       <TableView fx:id="itemsTableView" layoutX="4.0" layoutY="182.0" prefHeight="315.0" prefWidth="520.0">
