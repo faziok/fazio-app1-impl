@@ -5,41 +5,24 @@ package todoListApp.baseline;
  *  Copyright 2021 Keven Fazio
  */
 
-import javafx.stage.FileChooser;
+import javafx.collections.ObservableList;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
 
 public class Save {
+    public void saveTxtFile (File file, ObservableList<TodoListItem> list){
+            try {
+                PrintWriter pWriter = new PrintWriter(file);
+                for (TodoListItem s : list) {
+                    pWriter.write(s.getDescription() + "," + s.getDueDate() + "," + s.getStatus() + "\n");
+                }
 
-    public String setFileName (){
-        //prompt user for fileName
-        //scan in and return string
-        return null;
-    }
+                System.out.println("File written Successfully");
+                pWriter.close();
 
-    public String setFileLocation (){
-        //prompt user for fileLocation
-        //scan in and return string
-        return null;
-    }
-
-    public void writeFile (List<Map<Integer, String>> TodoList){
-        //try
-
-        /*
-        try {
-            //create printerwriter for new file and print newTxt to file.
-            PrintWriter pWriter = new PrintWriter(file);
-            pWriter.write(newTxt);
-
-            pWriter.close();
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-
-         */
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
     }
 }
+

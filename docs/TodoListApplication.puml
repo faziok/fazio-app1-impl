@@ -6,8 +6,12 @@ class Application{
 
 class TodoList{
     +addItem()
+    +getFilteredTodoList()
+    +getItemList
     +deleteItem()
     +clearItems()
+    +filterList()
+    +editItem()
 }
 
 class TodoListItem{
@@ -20,7 +24,6 @@ class TodoListItem{
     +getDueDate()
     +getStatus()
     +setStatus(boolean Status)
-    +editDescription()
 }
 
 class FilterItems{
@@ -28,17 +31,9 @@ class FilterItems{
 }
 
 class Save{
-    +setFileName()
-    +setFileLocation()
-    +writeList()
+    +saveTxtFile(File, ObservableList)
 }
 
-class Load{
-    +loadFIle()
-    +getLoadedFile();
-}
-
-Application <|-- Load
 Application <|-- TodoListItem
 Application <|-- TodoList
 Application <|-- FilterItems

@@ -37,8 +37,16 @@ public class TodoListItem {
     }
 
     public String getDueDate(){
+        String dueDateString;
+
+        if (dueDate == null){
+            dueDateString = "";
+        }else {
+            dueDateString = dueDate.toString();
+        }
+
         //get description
-        return dueDate.toString();
+        return dueDateString;
     }
 
     public void setDueDate(LocalDate date){
@@ -66,10 +74,6 @@ public class TodoListItem {
 
     @Override
     public String toString(){
-        return description + " " + dueDate + " " + getStatus();
-    }
-
-    public void editDescription (String description){
-        //set description with updated description for selected item when update button is pressed
+        return getDescription() + " " + getDueDate() + " " + getStatus();
     }
 }

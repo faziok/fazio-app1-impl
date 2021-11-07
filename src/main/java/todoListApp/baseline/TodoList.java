@@ -9,19 +9,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import java.time.LocalDate;
+
 public class TodoList {
     //initialize observable list
     private final ObservableList<TodoListItem> itemList = FXCollections.observableArrayList();
+    private final FilteredList<TodoListItem> filteredItems = new FilteredList<>(itemList, p -> true);
 
-    public void addItems(TodoListItem item){
+    public void addItems(String description, LocalDate date, boolean status){
+        //create TodoListItem object and add it to list
+        TodoListItem item = new TodoListItem(description, date, status);
+
         //Only add to the list if there are < 100 items currently in the list.
         if (itemList.size() < 100){
             itemList.add(item);
         }
     }
 
-    public ObservableList<TodoListItem> getTodoList(){
-        //get list
+    public ObservableList<TodoListItem> getFilteredTodoList(){
+        //get filtered list
+        return filteredItems;
+    }
+
+    public ObservableList<TodoListItem> getItemList(){
+        //get filtered list
         return itemList;
     }
 
@@ -35,7 +46,23 @@ public class TodoList {
         itemList.remove(item);
     }
 
-    public void filterList(){
-        //filter list based off choiceBox selection
+    public void filterList(String val){
+        filteredItems.setPredicate(todoListItem -> {
+            if (val.equals("All")){
+                return true;
+            } else if (todoListItem.getStatus().contains(val)){
+                return true;
+            } else return todoListItem.getStatus().contains(val);
+        });
+    }
+
+    public void editItem(String description, LocalDate date, boolean status, int listIndex){
+        //create TodoListItem object and add it to list
+        TodoListItem item = new TodoListItem(description, date, status);
+
+        //Only add to the list if there are < 100 items currently in the list.
+        if (itemList.size() < 100){
+            getItemList().set(listIndex, item);
+        }
     }
 }
