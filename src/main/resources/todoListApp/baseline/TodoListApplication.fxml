@@ -20,11 +20,14 @@
       <TableView fx:id="itemsTableView" layoutX="4.0" layoutY="182.0" prefHeight="315.0" prefWidth="520.0">
         <columns>
           <TableColumn fx:id="descriptionCol" editable="false" prefWidth="320.0" resizable="false" sortable="false" text="Description" />
-          <TableColumn fx:id="dueDateCol" editable="false" prefWidth="100.0" resizable="false" text="Due Date" />
-          <TableColumn fx:id="statusCol" editable="false" prefWidth="97.0" resizable="false" text="Status" />
+          <TableColumn fx:id="dueDateCol" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Due Date" />
+          <TableColumn fx:id="statusCol" editable="false" prefWidth="97.0" resizable="false" sortable="false" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="addItem" defaultButton="true" layoutX="459.0" layoutY="147.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="65.0" text="Add Item" />
+      <Button fx:id="addItem" defaultButton="true" layoutX="459.0" layoutY="147.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="65.0" text="Add Item">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
       <Button fx:id="clearButton" layoutX="388.0" layoutY="147.0" mnemonicParsing="false" onAction="#clear" prefHeight="25.0" prefWidth="65.0" text="Clear" />
       <Button fx:id="updateItem" layoutX="316.0" layoutY="147.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="65.0" text="Update" />
       <Button fx:id="deleteItem" layoutX="5.0" layoutY="507.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="25.0" prefWidth="65.0" text=" Delete Item">
